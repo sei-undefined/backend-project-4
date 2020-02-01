@@ -24,6 +24,8 @@ const pinSchema = new Schema({
         type: String
         // required:false
     }
+},{
+    timestamps: true
 })
 // define models
 const Pin = new Model("Pin", PinSchema)
