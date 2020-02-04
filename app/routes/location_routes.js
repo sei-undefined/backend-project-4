@@ -84,7 +84,7 @@ router.post('/locations/:pinId', requireToken, async (req,res,next) => {
         const filter = {pinsIds: NearbyPins[0]._id}
         let update = {$addToSet:{pinsIds: req.params.pinId}}
         const updatedLocation = await Location.findOneAndUpdate(filter,update)
-        // console.log(updatedLocation)
+        console.log(updatedLocation)
 
         // console.log(updatedLocation[0].pinsIds.concat(req.params.pinId))
         // updatedLocation[0].pinsIds= updatedLocation[0].pinsIds.concat(req.params.pinId)
