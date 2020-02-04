@@ -1,21 +1,35 @@
 // import mongoose schema
-const Schema = require('mongoose').Schema
-const Model = require('mongoose').model
+const mongoose = require('mongoose')
+
+// point schema
+const pointSchema = new mongoose.Schema({
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  });
+
 // schema for pin model
-const pinSchema = new Schema({
-    owner:{
+const pinSchema = new mongoose.Schema({
+    owner_id:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"User",
         required: true
     },
-    lat:{
-        type: Number,
-        required: true
+    location:{
+        type:pointSchema,
+        required:true
     },
-    lng:{
-        type: Number,
-        required: true
-    },
+    // location:{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref:"Point",
+    //     required: true
+    // },
     help:{
         type: Boolean,
         required: true
@@ -28,5 +42,8 @@ const pinSchema = new Schema({
     timestamps: true
 })
 // define models
-const Pin = new Model("Pin", PinSchema)
-module.exports={Pin}
+pinSchema.index({ location: "2dsphere" });
+const Pin = mongoose.model("Pin", pinSchema)
+module.exports=Pin
+
+
