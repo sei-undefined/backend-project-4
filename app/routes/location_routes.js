@@ -62,7 +62,7 @@ router.post('/locations/:pinId', requireToken, async (req,res,next) => {
     const NearbyPins = await Pin.find({
         location: {
          $near: {
-          $maxDistance: 0,
+          $maxDistance: 500,
           $geometry: {
            type: "Point",
            coordinates: loc

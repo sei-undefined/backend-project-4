@@ -31,6 +31,16 @@ const requireToken = passport.authenticate('bearer', {session: false})
 //        });
 //        res.sendStatus(111)
 // })
+// Index all users pins
+// Get /pins
+router.get('/allpins',requireToken,(req,res,next)=>{
+    const ownerId = req.user._id
+    Pin.find()
+    .then(pins=>{
+        res.status(200).json({pins:pins})
+    })
+    .catch(next)
+})
 // Index
 // Get /pins
 router.get('/pins',requireToken,(req,res,next)=>{
@@ -44,7 +54,7 @@ router.get('/pins',requireToken,(req,res,next)=>{
 // Create
 // POST /pins
 router.post('/pins', requireToken, async (req,res,next)=>{
-
+    console.log('this is the CREATE Body',req.body)
     const newPin = new Pin(req.body.pin)
     newPin.owner_id = req.user._id
     newPin.location = req.body.pin.location
