@@ -1,0 +1,35 @@
+
+sign in/up
+{
+    "credentials":{
+        "email":"user1@gmail.com",
+        "password":"123",
+        "password_confirmation": "123"
+    }
+}
+
+pin body
+{
+	"pin":{
+		"lat":"24",
+		"lng":"14",
+		"help":true,
+		"desc":null
+	}
+}
+
+locations body{
+	"location": {
+		"pinsIds":[
+			{"_id": "5e37d7137d4ac21490e62285"}
+			],
+		"ownderIds":[
+			{"_id":"5e37d6e87d4ac21490e62284"}
+			],
+		"center":{
+			"lat":1,
+			"lng":1
+		},
+		"orgConfirm":"This is confirmed by org"
+	}
+}

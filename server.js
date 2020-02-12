@@ -7,6 +7,8 @@ const cors = require('cors')
 // require route files
 const exampleRoutes = require('./app/routes/example_routes')
 const userRoutes = require('./app/routes/user_routes')
+const pinRoutes = require('./app/routes/pin_routes')
+const locationRoutes = require('./app/routes/location_routes')
 
 // require error handling middleware
 const errorHandler = require('./lib/error_handler')
@@ -47,6 +49,7 @@ const port = process.env.PORT || expressPort
 // this middleware makes it so the client can use the Rails convention
 // of `Authorization: Token <token>` OR the Express convention of
 // `Authorization: Bearer <token>`
+
 app.use(tokenOrBearer)
 
 // register passport authentication middleware
@@ -63,8 +66,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(requestLogger)
 
 // register route files
-app.use(exampleRoutes)
 app.use(userRoutes)
+app.use(pinRoutes)
+app.use(exampleRoutes)
+app.use(locationRoutes)
 
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
